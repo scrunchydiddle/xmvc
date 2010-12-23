@@ -1,5 +1,5 @@
-use strict;
-use warnings;
+#!/usr/bin/perl
+
 use File::Copy;
 
 my $name = $ARGV[0];
@@ -11,6 +11,7 @@ populate_dir($root,\@dir_arr);
 populate_application();
 populate_public();
 populate_tmp();
+populate_others();
 
 sub populate_dir {
     my ( $path, $arr_ref ) = @_;
@@ -24,13 +25,13 @@ sub copy_files {
     my ($from, $to) = @_;
     opendir( DIR , $from );
     while ( my $filename = readdir(DIR)){
-        next if $filename eq '.' || $filename eq '..';
-        copy ("$from$filename","$to$filename") or die "fail to copy$!";
+        next if $filename eq '.' || $filename eq '..' || -d "$from$filename";
+        print 'copying file: '."$from$filename".' to '."$to\n";
+        do (copy("$from$filename","$to$filename") or warn "fail to copy$!") unless -d $filename;
+
     }
 }
 
-sub make_dir {
-    
 sub populate_application {
     my $path = $root.'application/';
     my @dir_arr = qw( controllers models views );
@@ -40,6 +41,12 @@ sub populate_application {
     }
 }
 
+sub populate_others {
+    my @dir_arr = qw( config db library public scripts );
+    foreach my $dir(@dir_arr) {
+        copy_files("$dir\/","$root$dir\/");
+    }
+}
 sub populate_public {
     my $path = $root.'public/';
     my @dir_arr = qw( css img js swf);
