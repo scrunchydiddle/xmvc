@@ -7,11 +7,17 @@ die 'No name specified' unless $name;
 my @dir_arr = qw( application config db library public scripts tmp );
 my $root = '../'.$name.'/';
 mkdir $root;
-populate_dir($root,\@dir_arr);
-populate_application();
-populate_public();
-populate_tmp();
-populate_others();
+start_populate();
+
+
+
+sub start_populate {
+    populate_dir($root,\@dir_arr);
+    populate_application();
+    populate_public();
+    populate_tmp();
+    populate_others();
+}
 
 sub populate_dir {
     my ( $path, $arr_ref ) = @_;
