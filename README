@@ -1,0 +1,6 @@
+xmvc is a simple php mvc 
+
+Step to create application
+
+1. run xmvc script
+    xmvc <app name>
