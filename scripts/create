@@ -1,9 +1,7 @@
 #!/usr/bin/perl 
 
-use strict;
-use warnings;
-
 my $name = $ARGV[0];
+$name = ucfirst($name);
 open CONTROLLER, "<controller.template";
 my $controller_temp;
 
@@ -26,6 +24,18 @@ $model_temp =~ s/\<name\>/$name/geis;
 my $controller_name = lc($name).'controller.php';
 my $model_name = lc($name).'.php';
 
+print 'Creating files '.$name."\n";
 my $app_root = '../application/';
 open CONTROLLER, "+>$app_root".'controllers/'."$controller_name" or warn "$!";
+print 'Creating controller page'.$controller_name."\n";
 print CONTROLLER $controller_temp;
+close CONTROLLER;
+
+open MODEL, "+>$app_root".'models/'."$model_name" or warn "$!";
+print 'Creating model page'.$model_name."\n";
+print MODEL $model_temp;
+close MODEL;
+
+my $view_name = lc($name).'s';
+print 'Creating view directory for '.$name."\n";
+mkdir $app_root.'views/'.$name;
