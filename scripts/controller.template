@@ -1,0 +1,4 @@
+<?php
+
+class <name>sController extends Controller {
+}
