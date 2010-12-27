@@ -36,5 +36,5 @@ print MODEL $model_temp;
 close MODEL;
 
 my $view_name = lc($name).'s';
-print 'Creating view directory for '.$name."\n";
-mkdir $app_root.'views/'.lc($name);
+print 'Creating view directory for '.$view_name)."\n";
+mkdir $app_root.'views/'.$view_name;
