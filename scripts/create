@@ -32,7 +32,7 @@ print CONTROLLER $controller_temp;
 close CONTROLLER;
 
 open MODEL, "+>$app_root".'models/'."$model_name" or warn "$!";
-print 'Creating model page'.$model_name."\n";
+print 'Creating model page '.$model_name."\n";
 print MODEL $model_temp;
 close MODEL;
 
