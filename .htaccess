@@ -1,6 +1,4 @@
-<IfModule and mod_rewrite.c>
     RewriteEngine on
     RewriteRule /xmvc
     RewriteRule ^$ public/ [L]
     RewriteRule (.*) public/$1 [L]
-</IfModule>
