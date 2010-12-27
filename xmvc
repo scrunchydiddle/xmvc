@@ -12,6 +12,7 @@ start_populate();
 
 
 sub start_populate {
+    copy('.htaccess',$root.'.htaccess');
     populate_dir($root,\@dir_arr);
     populate_application();
     populate_public();
